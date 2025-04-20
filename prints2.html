@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Detail Mutasi Transaksi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print mb-3">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Detail</button>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">⬅️ Kembali</a>
+    </div>
+
+    <h2>Detail Transaction</h2>
+
+    <div class="list-group">
+        <div class="list-group-item">
+            <strong>Nama:</strong> {{ $mutasi->user->name ?? '-' }}
+        </div>
+        <div class="list-group-item">
+            <strong>Tanggal:</strong> {{ $mutasi->created_at->format('d-m-Y H:i') }}
+        </div>
+        <div class="list-group-item">
+            <strong>Jenis:</strong>
+            @if ($mutasi->credit > 0)
+                <span class="text-success">Top Up / Credit</span>
+            @elseif ($mutasi->debit > 0)
+                <span class="text-danger">Withdraw / Debit</span>
+            @endif
+        </div>
+        <div class="list-group-item">
+            <strong>Jumlah:</strong> Rp{{ number_format($mutasi->credit ?: $mutasi->debit) }}
+        </div>
+        <div class="list-group-item">
+            <strong>Status:</strong>
+            @if ($mutasi->status === 'done')
+                <span class="text-success">{{ ucfirst($mutasi->status) }}</span>
+            @elseif ($mutasi->status === 'pending')
+                <span class="text-warning">{{ ucfirst($mutasi->status) }}</span>
+            @else
+                <span>{{ ucfirst($mutasi->status) }}</span>
+            @endif
+        </div>
+        <div class="list-group-item">
+            <strong>Deskripsi:</strong> {{ $mutasi->description }}
+        </div>
+    </div>
+
+</body>
+</html>
