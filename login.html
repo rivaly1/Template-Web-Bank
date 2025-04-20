@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center h-screen">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md">
+        <div class="text-center mb-8">
+            <i class="fas fa-university text-6xl text-blue-500 mb-4"></i>
+            <h2 class="text-3xl font-bold text-gray-800">Selamat Datang Kembali</h2>
+        </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700" for="email">
+                 Email:
+                </label>
+                <div class="relative mt-1">
+                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                  <i class="fas fa-envelope">
+                  </i>
+                 </span>
+                 <input class="pl-10 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" id="email" name="email" required="" type="email"/>
+                </div>
+               </div>
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                <div class="relative mt-1">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                     <i class="fas fa-lock">
+                     </i>
+                    </span>
+                    <input class="pl-10 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" id="password" name="password" required="" type="password"/>
+                   </div>
+                </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300">Masuk</button>
+        </form>
+    </div>
+</body>
+</html>
